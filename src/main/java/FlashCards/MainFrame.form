@@ -28,22 +28,27 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButtonStudy" max="32767" attributes="0"/>
-                          <Component id="jButtonSave" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButtonLoad" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelVocabNum" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelVocabCount" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Component id="jButtonStudyReverse" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLabel1" max="32767" attributes="0"/>
-                  <Component id="jTextFieldLessonSize" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jButtonCancel" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabelVocabNum" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelVocabCount" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButtonLoad" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jButtonSave" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jTextFieldLessonSize" alignment="0" pref="76" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jButtonStudy" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jButtonStudyReverse" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelStudy" max="32767" attributes="0"/>
+              <Component id="jPanelStudy" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -69,6 +74,8 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldLessonSize" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabelVocabCount" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -89,15 +96,19 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextFieldAnswer" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelResult" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jLabelAnswer" alignment="1" pref="653" max="32767" attributes="0"/>
-                              <Component id="jLabelQuestion" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jTextFieldAnswer" max="32767" attributes="0"/>
+                      <Component id="jLabelAnswer" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabelResult" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="570" max="32767" attributes="0"/>
+                                  <Component id="jLabelLessonTimer" min="-2" pref="83" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jLabelQuestion" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -106,11 +117,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelQuestion" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="jLabelLessonTimer" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelQuestion" min="-2" pref="174" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelResult" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelAnswer" min="-2" pref="155" max="-2" attributes="0"/>
+                  <Component id="jLabelAnswer" min="-2" pref="98" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextFieldAnswer" pref="85" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -160,6 +173,12 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="jLabel1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelLessonTimer">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="0:00"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -220,6 +239,14 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="100"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonCancel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -3,7 +3,7 @@ apply plugin: 'jacoco'
 apply plugin: 'application'
 
 
-mainClassName = 'FlashRussian.MainFrame'
+mainClassName = 'FlashCards.MainFrame'
 
 repositories {
     jcenter()

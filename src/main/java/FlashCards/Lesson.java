@@ -1,5 +1,8 @@
 package FlashCards;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,7 +50,7 @@ public class Lesson {
     boolean isRUEN = true;
     
     /**
-     * A list of indexes to randomize our deck
+     * A list of indexes to determine the order of vocab from our deck
      */
     ArrayList <Integer> deckOrder;
     
@@ -61,6 +64,11 @@ public class Lesson {
      */
     int numVocab = 100;
     int vocabCount = 0;
+    
+    /**
+     * Time the lesson started
+     */
+    Date startTime;
     
     /**
      * Create a new Lesson
@@ -100,6 +108,9 @@ public class Lesson {
         // Prepare gui
         NextWord();
         theGui.SetProgress(vocabCount, numVocab);
+        
+        // Start the timer
+        startTime = new Date();
     }
     
     /**
@@ -126,19 +137,13 @@ public class Lesson {
             }
             else
             {
-                index = 0;
-                isRunning = false;
-                theGui.SetResult("");
-                theGui.SetAnswer("");
-                theGui.SetQuestion("");
-                theGui.ClearAnswertestField();
-                theGui.SetResult("Lesson Completed");
+                EndLesson();
             }
             waitForEnter = false;      
             return;
         }
 
-        // Keepign it clean
+        // Keeping it clean
         Vocab vocab = theDeck.GetVocab(deckOrder.get(index));
         
         // Parse the result and update
@@ -172,10 +177,25 @@ public class Lesson {
                 upgradeGrade = !( sdf.format(vocab.lastSeenENRU).equals(sdf.format(new Date())) );
             }
             
-            if (null != vocab.theResult.result && upgradeGrade)
+            // Display result
             switch (vocab.theResult.result) {
                 case PERFECT:
                     theGui.SetResult("Perfect!");
+                    break;
+                case GOOD:
+                    theGui.SetResult("Good!");
+                    break;
+                case CLOSE:
+                    theGui.SetResult("Close!");
+                    break;
+                default:
+                    break;
+            }
+            
+            // Upgrade grade
+            if (null != vocab.theResult.result && upgradeGrade)
+            switch (vocab.theResult.result) {
+                case PERFECT:
                     if (isRUEN)
                     {
                         vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
@@ -185,7 +205,6 @@ public class Lesson {
                         vocab.gradeENRU += (100-vocab.gradeENRU) * 0.25;
                     }   break;
                 case GOOD:
-                    theGui.SetResult("Good!");
                     if (isRUEN)
                     {
                         vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
@@ -195,7 +214,6 @@ public class Lesson {
                         vocab.gradeENRU += (100-vocab.gradeENRU) * 0.25;
                     }   break;
                 case CLOSE:
-                    theGui.SetResult("Close!");
                     if (isRUEN)
                     {
                         vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
@@ -272,4 +290,39 @@ public class Lesson {
         //mediaPlayer.PlayWav(theGui.GetDeckPath() + "audio/" + theDeck.GetVocab(deckOrder.get(index)).audioFile);
         mediaPlayer.PlayMP3(theGui.GetDeckPath() + "audio/" + theDeck.GetVocab(deckOrder.get(index)).audioFile);
     }
-}
+    
+    /**
+     * End the lesson
+     */
+    public void EndLesson()
+    {
+        index = 0;
+        isRunning = false;
+        theGui.SetResult("");
+        theGui.SetAnswer("");
+        theGui.SetQuestion("");
+        theGui.ClearAnswertestField();
+        theGui.SetResult("Lesson Completed");
+
+        // Log lesson stats
+        try{
+            Date stopTime = new Date();
+
+            long elapsedTime = stopTime.getTime() - startTime.getTime();    // ms
+            elapsedTime /= 1000;    // Seconds
+
+            BufferedWriter bfw = new BufferedWriter(new FileWriter(new File("LessonLog.txt"), true));
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+            bfw.append(dateFormat.format(startTime) + "," + vocabCount + "," + elapsedTime);
+            bfw.newLine();            
+            
+            bfw.flush();
+            bfw.close();
+        }
+        catch (Exception ex){}                
+
+        System.out.println("Saved lesson data to log file.");
+    }
+    
+} // end class

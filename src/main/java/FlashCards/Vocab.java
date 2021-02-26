@@ -17,13 +17,13 @@ public class Vocab {
     /**
      * Filename for an audio file for this vocab
      */
-    String audioFile;
+    String audioFile = "none";
     
     /**
      * The last time we saw this vocab
      */
-    Date lastSeenRUEN;
-    Date lastSeenENRU;
+    Date lastSeenRUEN = new Date();
+    Date lastSeenENRU = new Date();
     
     /**
      * The result of studying this word
@@ -33,19 +33,19 @@ public class Vocab {
     /**
      * Current grade, an estimate of how well we know this word
      */
-    float gradeRUEN;
-    float gradeENRU;
+    float gradeRUEN = 0.0f;
+    float gradeENRU = 0.0f;
     
     /**
      * Number of times we studied this word
      */
-    int timesStudiedRUEN;
-    int timesStudiedENRU;
+    int timesStudiedRUEN = 0;
+    int timesStudiedENRU = 0;
     
     /**
      * Relative frequency in the language
      */
-    int frequency;
+    int frequency = 99;
     
     /**
      * Default constructor

@@ -41,43 +41,55 @@ public class Deck {
             String input = bfr.readLine(); // skip the header
             while ( (input = bfr.readLine() ) != null )
             {
+                Vocab v = new Vocab();
+                
                 // Split into separate values
                 String[] split = input.split(",");
                 
-                // Size check, ignore if wrong
-                if (split.length != 10)
+                // Size check
+                if (split.length == 2)
+                {
+                    // New vocab, fill in the rest of the numbers
+                    v.english = split[0];
+                    v.russian = split[1];
+                }
+                else if (split.length != 10)
+                {
+                    // Wrong size and not sure what is wrong
                     continue;
-                
-                Vocab v = new Vocab();
-                v.english = split[0];
-                v.russian = split[1];
-                v.gradeRUEN = Float.parseFloat(split[2]);
-                v.timesStudiedRUEN = Integer.parseInt(split[3]);
-                
-                if (split[4].equalsIgnoreCase("NA"))
-                {
-                    v.lastSeenRUEN = new Date();
                 }
                 else
                 {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-                    v.lastSeenRUEN = formatter.parse(split[4]);
-                }
-                
-                v.gradeENRU = Float.parseFloat(split[5]);
-                v.timesStudiedENRU = Integer.parseInt(split[6]);
-                if (split[7].equalsIgnoreCase("NA"))
-                {
-                    v.lastSeenENRU = new Date();
-                }
-                else
-                {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-                    v.lastSeenENRU = formatter.parse(split[7]);
-                }
+                    v.english = split[0];
+                    v.russian = split[1];
+                    v.gradeRUEN = Float.parseFloat(split[2]);
+                    v.timesStudiedRUEN = Integer.parseInt(split[3]);
 
-                v.frequency = Integer.parseInt(split[8]);
-                v.audioFile = split[9];
+                    if (split[4].equalsIgnoreCase("NA"))
+                    {
+                        v.lastSeenRUEN = new Date();
+                    }
+                    else
+                    {
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+                        v.lastSeenRUEN = formatter.parse(split[4]);
+                    }
+
+                    v.gradeENRU = Float.parseFloat(split[5]);
+                    v.timesStudiedENRU = Integer.parseInt(split[6]);
+                    if (split[7].equalsIgnoreCase("NA"))
+                    {
+                        v.lastSeenENRU = new Date();
+                    }
+                    else
+                    {
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+                        v.lastSeenENRU = formatter.parse(split[7]);
+                    }
+
+                    v.frequency = Integer.parseInt(split[8]);
+                    v.audioFile = split[9];
+                }
                 
                 // Add the completed vocab to our list
                 vocabulary.add(v);

@@ -7,11 +7,21 @@ import javax.sound.sampled.Clip;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.embed.swing.JFXPanel;
 
 /**
  * Wrapper to play MP3 files
  */
 public class Mp3Player {
+    
+    
+    /**
+     * Create a new Mp3Player
+     */
+    public Mp3Player()
+    {
+        final JFXPanel fxPanel = new JFXPanel();
+    }
     
     /**
      * Play a MP3 file once
