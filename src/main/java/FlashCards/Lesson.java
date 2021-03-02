@@ -194,38 +194,48 @@ public class Lesson {
             
             // Upgrade grade
             if (null != vocab.theResult.result && upgradeGrade)
-            switch (vocab.theResult.result) {
-                case PERFECT:
-                    if (isRUEN)
-                    {
-                        vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
-                    }
-                    else
-                    {
-                        vocab.gradeENRU += (100-vocab.gradeENRU) * 0.25;
-                    }   break;
-                case GOOD:
-                    if (isRUEN)
-                    {
-                        vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
-                    }
-                    else
-                    {
-                        vocab.gradeENRU += (100-vocab.gradeENRU) * 0.25;
-                    }   break;
-                case CLOSE:
-                    if (isRUEN)
-                    {
-                        vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
-                    }
-                    else
-                    {
-                        vocab.gradeENRU += (100-vocab.gradeENRU) * 0.25;
-                    }   break;
-                default:
-                    break;
+            {
+                if (isRUEN && vocab.gradeRUEN == 0)
+                {
+                    vocab.gradeRUEN = 25;
+                }
+                else if (!isRUEN && vocab.gradeRUEN == 0)
+                {
+                    vocab.gradeENRU = 25;
+                }
+                switch (vocab.theResult.result) 
+                {
+                    case PERFECT:
+                        if (isRUEN)
+                        {
+                            vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.35;
+                        }
+                        else
+                        {
+                            vocab.gradeENRU += (100-vocab.gradeENRU) * 0.35;
+                        }   break;
+                    case GOOD:
+                        if (isRUEN)
+                        {
+                            vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.25;
+                        }
+                        else
+                        {
+                            vocab.gradeENRU += (100-vocab.gradeENRU) * 0.25;
+                        }   break;
+                    case CLOSE:
+                        if (isRUEN)
+                        {
+                            vocab.gradeRUEN += (100-vocab.gradeRUEN) * 0.15;
+                        }
+                        else
+                        {
+                            vocab.gradeENRU += (100-vocab.gradeENRU) * 0.15;
+                        }   break;
+                    default:
+                        break;
+                }
             }
-            
             // Clamp grades
             vocab.gradeRUEN = Math.min(vocab.gradeRUEN, 100);
             vocab.gradeENRU = Math.min(vocab.gradeENRU, 100);
